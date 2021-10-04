@@ -70,6 +70,7 @@ namespace A1Final.Controllers
         {
             if (!ModelState.IsValid)
             {
+                
                 return View(model);
             }
 

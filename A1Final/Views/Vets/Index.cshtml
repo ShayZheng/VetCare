@@ -15,7 +15,7 @@
 </p>
 
 <table class="table">
-    <thread>
+    <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
@@ -31,7 +31,7 @@
             </th>
             <th></th>
         </tr>
-    </thread>
+    </thead>
     <tbody>
         @foreach (var item in Model)
         {
@@ -60,8 +60,13 @@
 </table>
 
 @section Scripts {
-    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
-    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
-    <script>$(document).ready(function () { $('.table').DataTable(); });</script>
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+    <script>
+        $(document).ready(function () {
+        });
+        $('.table').DataTable();
+    </script>
 }
-<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" />
