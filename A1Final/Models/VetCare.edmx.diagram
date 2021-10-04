@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ac854fc0e4144ce6ae40fc7210c19914" Name="Diagram1" ZoomLevel="59">
+        <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="9.125" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="9.125" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="6.875" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.Booking" Width="1.5" PointX="3.75" PointY="1.5" />
+        <EntityTypeShape EntityType="Model.Vets" Width="1.5" PointX="0.5" PointY="2.875" />
+        <EntityTypeShape EntityType="Model.Pets" Width="1.5" PointX="6.875" PointY="6" />
+        <EntityTypeShape EntityType="Model.Feedback" Width="1.5" PointX="3.875" PointY="6" />
+        <AssociationConnector Association="Model.AspNetUsersBooking" />
+        <AssociationConnector Association="Model.AspNetUsersPets" />
+        <AssociationConnector Association="Model.VetsBooking" />
+        <AssociationConnector Association="Model.BookingFeedback" />
+        <AssociationConnector Association="Model.AspNetUsersFeedback" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
