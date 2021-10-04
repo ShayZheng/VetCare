@@ -22,10 +22,10 @@ namespace A1Final.Models
         }
     
         public int Id { get; set; }
-        [StringLength(200)]
+        [Required]
         public string FirstName { get; set; }
-        [StringLength(200)]
         public string LastName { get; set; }
+        [Required]
         public string Speciality { get; set; }
         [Required]
         public string Location { get; set; }

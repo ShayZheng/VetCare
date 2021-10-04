@@ -16,7 +16,6 @@ namespace A1Final.Models
     public partial class Feedback
     {
         public int Id { get; set; }
-
         [Range(1,5)]
         public int Rating { get; set; }
         public string Comments { get; set; }

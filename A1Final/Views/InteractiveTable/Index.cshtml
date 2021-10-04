@@ -1,0 +1,65 @@
+﻿@model IEnumerable<A1Final.Models.InteractiveTable>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Interacitive Data with User and Booking tables</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Email
+            </th>
+            <th>
+                User Id
+            </th>
+            <th>
+                Booking User Id
+            </th>
+            <th>
+                Booking Date
+            </th>
+            <th>
+                Booking Descriptions
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.userdetails.Email
+                </td>
+                <td>
+                    @item.userdetails.Id
+                </td>
+                <td>
+                    @item.bookingdetails.AspNetUsersId
+                </td>
+                <td>
+                    @item.bookingdetails.Date
+                </td>
+                <td>
+                    @item.bookingdetails.Descirption
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+    <script>
+        $(document).ready(function () {
+        });
+        $('.table').DataTable();
+    </script>
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" />

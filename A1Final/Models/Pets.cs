@@ -16,7 +16,7 @@ namespace A1Final.Models
     public partial class Pets
     {
         public int Id { get; set; }
-        [StringLength(200)]
+        [Required]
         public string Name { get; set; }
         [Required]
         public string Type { get; set; }
