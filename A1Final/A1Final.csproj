@@ -173,6 +173,7 @@
     <Compile Include="Controllers\BookingsController.cs" />
     <Compile Include="Controllers\FeedbacksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InteractiveTableController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PetsController.cs" />
     <Compile Include="Controllers\VetsController.cs" />
@@ -196,6 +197,7 @@
       <DependentUpon>VetCare.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InteractiveTable.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Pets.cs">
       <DependentUpon>VetCare.tt</DependentUpon>
@@ -656,7 +658,9 @@
     <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Home\Send_Email.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\InteractiveTable\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
