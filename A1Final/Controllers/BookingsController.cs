@@ -29,6 +29,7 @@ namespace A1Final.Controllers
         }
 
         // GET: Bookings/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,6 +45,7 @@ namespace A1Final.Controllers
         }
 
         // GET: Bookings/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email");
@@ -61,24 +63,50 @@ namespace A1Final.Controllers
         // Comment out ,AspNetUsersId
         public ActionResult Create([Bind(Include = "Id,Date,Descirption,VetsId")] Booking booking)
         {
+            //Booking constraint for date selected
+            
+
+            
+            
             //each user can only view their own bookings by identify the userid
             booking.AspNetUsersId = User.Identity.GetUserId();
             ModelState.Clear();
             TryValidateModel(booking);
 
-            if (ModelState.IsValid)
+            int i = 0;
+            foreach (Booking bo in db.BookingSet.ToList())
             {
-                db.BookingSet.Add(booking);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                
+                if (bo.Date == booking.Date && bo.AspNetUsersId == booking.AspNetUsersId)
+                {
+                    i++;
+                }
+                
             }
 
-            //ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", booking.AspNetUsersId);
-            //ViewBag.VetsId = new SelectList(db.VetsSet, "Id", "FirstName", booking.VetsId);
-            return View(booking);
+            //If there are no dates repeated within the same user bookings, the booking would create successfully
+            //Else it would return an error page
+            if (i == 0)
+            {
+                if (ModelState.IsValid)
+                {
+                    db.BookingSet.Add(booking);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                //ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", booking.AspNetUsersId);
+                //ViewBag.VetsId = new SelectList(db.VetsSet, "Id", "FirstName", booking.VetsId);
+                return View(booking);
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
 
         // GET: Bookings/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -100,6 +128,7 @@ namespace A1Final.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,Date,Descirption,AspNetUsersId,VetsId")] Booking booking)
         {
             if (ModelState.IsValid)
@@ -114,6 +143,7 @@ namespace A1Final.Controllers
         }
 
         // GET: Bookings/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -131,6 +161,7 @@ namespace A1Final.Controllers
         // POST: Bookings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Booking booking = db.BookingSet.Find(id);
@@ -146,6 +177,12 @@ namespace A1Final.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // Add a error view
+        public ActionResult Error() 
+        {
+            return View();
         }
     }
 }

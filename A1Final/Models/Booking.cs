@@ -24,6 +24,7 @@ namespace A1Final.Models
         public int Id { get; set; }
         [Required]
         public System.DateTime Date { get; set; }
+
         public string Descirption { get; set; }
         public string AspNetUsersId { get; set; }
         public int VetsId { get; set; }

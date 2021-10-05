@@ -15,11 +15,14 @@ namespace A1Final.Controllers
             Entities en = new Entities();
             List<Booking> bookingnames = en.BookingSet.ToList();
             List<AspNetUsers> users = en.AspNetUsers.ToList();
+            List<Vets> vets = en.VetsSet.ToList();
 
             var interactivetable = from b in bookingnames
                                    join u in users on b.AspNetUsersId equals u.Id into table1
                                    from u in table1.DefaultIfEmpty()
-                                   select new InteractiveTable { bookingdetails = b, userdetails = u };
+                                   join v in vets on b.VetsId equals v.Id into table2
+                                   from v in table2.DefaultIfEmpty()
+                                   select new InteractiveTable { bookingdetails = b, userdetails = u, vetdetails = v };
 
             return View(interactivetable);
         }

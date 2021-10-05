@@ -9,5 +9,7 @@ namespace A1Final.Models
     {
         public Booking bookingdetails { get; set; }
         public AspNetUsers userdetails { get; set; }
+
+        public Vets vetdetails { get; set; }
     }
 }

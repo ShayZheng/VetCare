@@ -658,6 +658,7 @@
     <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Home\Send_Email.cshtml" />
     <Content Include="Views\InteractiveTable\Index.cshtml" />
+    <Content Include="Views\Bookings\Error.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

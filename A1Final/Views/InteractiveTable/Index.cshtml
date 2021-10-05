@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<A1Final.Models.InteractiveTable>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<h2>Interacitive Data with User and Booking tables</h2>
+<h2>Interacitive Data with User, Booking and Vets tables</h2>
 
 <table class="table">
     <thead>
@@ -25,31 +26,50 @@
             <th>
                 Booking Descriptions
             </th>
+            <th>
+                Booking Vets
+            </th>
+            <th>
+                Vets Speciality
+            </th>
+            <th>
+                Vets Location
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @item.userdetails.Email
-                </td>
-                <td>
-                    @item.userdetails.Id
-                </td>
-                <td>
-                    @item.bookingdetails.AspNetUsersId
-                </td>
-                <td>
-                    @item.bookingdetails.Date
-                </td>
-                <td>
-                    @item.bookingdetails.Descirption
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @item.userdetails.Email
+            </td>
+            <td>
+                @item.userdetails.Id
+            </td>
+            <td>
+                @item.bookingdetails.AspNetUsersId
+            </td>
+            <td>
+                @item.bookingdetails.Date
+            </td>
+            <td>
+                @item.bookingdetails.Descirption
+            </td>
+            <td>
+                @item.vetdetails.FirstName @item.vetdetails.LastName
+            </td>
+            <td>
+                @item.vetdetails.Speciality
+            </td>
+            <td>
+                @item.vetdetails.Location
+            </td>
+        </tr>
         }
     </tbody>
+
 </table>
 
 @section Scripts {
