@@ -5,81 +5,103 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@*<link href="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js" rel="stylesheet" />*@
 
 <h2>Interacitive Data with User, Booking and Vets tables</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Email
-            </th>
-            <th>
-                User Id
-            </th>
-            <th>
-                Booking User Id
-            </th>
-            <th>
-                Booking Date
-            </th>
-            <th>
-                Booking Descriptions
-            </th>
-            <th>
-                Booking Vets
-            </th>
-            <th>
-                Vets Speciality
-            </th>
-            <th>
-                Vets Location
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @item.userdetails.Email
-            </td>
-            <td>
-                @item.userdetails.Id
-            </td>
-            <td>
-                @item.bookingdetails.AspNetUsersId
-            </td>
-            <td>
-                @item.bookingdetails.Date
-            </td>
-            <td>
-                @item.bookingdetails.Descirption
-            </td>
-            <td>
-                @item.vetdetails.FirstName @item.vetdetails.LastName
-            </td>
-            <td>
-                @item.vetdetails.Speciality
-            </td>
-            <td>
-                @item.vetdetails.Location
-            </td>
-        </tr>
-        }
-    </tbody>
 
-</table>
+@if (Model == null || Model.Count() == 0)
+{
+    <p>There is no records</p>
+}
+else
+
+{
+    <table class="table" id="interactive">
+        <thead>
+            <tr>
+                <th>
+                    Email
+                </th>
+                <th>
+                    User Id
+                </th>
+                <th>
+                    Booking User Id
+                </th>
+                <th>
+                    Booking Date
+                </th>
+                <th>
+                    Booking Descriptions
+                </th>
+                <th>
+                    Vets First Name
+                </th>
+                <th>
+                    Vets Last Name
+                </th>
+                <th>
+                    Vets Speciality
+                </th>
+                <th>
+                    Vets Location
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.userdetails.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.userdetails.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bookingdetails.AspNetUsersId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bookingdetails.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bookingdetails.Descirption)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vetdetails.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vetdetails.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vetdetails.Speciality)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vetdetails.Location)
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    
+}
 
 @section Scripts {
-    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
-    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
-    <script>
-        $(document).ready(function () {
-        });
-        $('.table').DataTable();
-    </script>
+        
+        <script>
+            $(document).ready(function ()
+            {
+                $("#interactive").DataTable();
+            });
+        </script>
+    
 }
-<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
-      rel="stylesheet" />
+
+
+
+
+

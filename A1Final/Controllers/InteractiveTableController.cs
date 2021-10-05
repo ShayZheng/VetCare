@@ -26,5 +26,7 @@ namespace A1Final.Controllers
 
             return View(interactivetable);
         }
+
+       
     }
 }
