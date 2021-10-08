@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 
 namespace A1Final.Utils
 {
@@ -34,7 +35,23 @@ namespace A1Final.Utils
 
             var plainTextContent = contents;
 
-            client.Send("from@example.com", toEmail, subject, contents);
+            //Add a mailmessage which includes from,subject and body.
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress("from@example.com"),
+                Subject = subject,
+                Body = contents,
+                IsBodyHtml = true,
+            };
+            
+            // Add attachment into mailMessage
+            var attachment = new System.Net.Mail.Attachment("C:\\Users\\yingzheng\\source\\repos\\A1Final\\Vets.jpg", MediaTypeNames.Image.Jpeg);
+
+            mailMessage.Attachments.Add(attachment);
+            mailMessage.To.Add(toEmail);
+
+            // send the mailMessage with attachment
+            client.Send(mailMessage);
         }
     }
 }
