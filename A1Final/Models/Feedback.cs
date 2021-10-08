@@ -11,12 +11,10 @@ namespace A1Final.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Feedback
     {
         public int Id { get; set; }
-        [Range(1,5)]
         public int Rating { get; set; }
         public string Comments { get; set; }
         public int BookingId { get; set; }
