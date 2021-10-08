@@ -21,6 +21,10 @@ namespace A1Final.Utils
             //var htmlContent = "<p>" + contents + "</p>";
             //var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             //var response = client.SendEmailAsync(msg);
+            
+            
+            //write a suscribtionList(arraylist with user email) to contains the users who click the suscribtion options
+            //foreach email address in 
 
             var client = new SmtpClient("smtp.mailtrap.io", 2525)
             {

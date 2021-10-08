@@ -351,6 +351,8 @@
           <Property Name="Speciality" Type="String" Nullable="false" />
           <Property Name="Location" Type="String" Nullable="false" />
           <NavigationProperty Name="Booking" Relationship="Model.VetsBooking" FromRole="Vets" ToRole="Booking" />
+          <Property Name="Lon" Type="String" Nullable="false" />
+          <Property Name="Lat" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Pets">
           <Key>
