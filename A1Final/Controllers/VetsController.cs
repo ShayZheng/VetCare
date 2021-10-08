@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -47,8 +46,7 @@ namespace A1Final.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Speciality,Location")] Vets vets)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Speciality,Lon,Lat")] Vets vets)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +78,7 @@ namespace A1Final.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Speciality,Location")] Vets vets)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Speciality,Lon,Lat")] Vets vets)
         {
             if (ModelState.IsValid)
             {

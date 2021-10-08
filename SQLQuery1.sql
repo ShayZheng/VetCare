@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/30/2021 20:50:55
+-- Date Created: 10/08/2021 21:31:56
 -- Generated from EDMX file: C:\Users\yingzheng\source\repos\A1Final\A1Final\Models\VetCare.edmx
 -- --------------------------------------------------
 
@@ -20,11 +20,26 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AspNetUserLogins] DROP CONSTRAINT [FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId];
 GO
-IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId];
+IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetRoles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUserRoles_AspNetRoles];
 GO
-IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId];
+IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetUsers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUserRoles_AspNetUsers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AspNetUsersBooking]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BookingSet] DROP CONSTRAINT [FK_AspNetUsersBooking];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AspNetUsersPets]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PetsSet] DROP CONSTRAINT [FK_AspNetUsersPets];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VetsBooking]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BookingSet] DROP CONSTRAINT [FK_VetsBooking];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BookingFeedback]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FeedbackSet] DROP CONSTRAINT [FK_BookingFeedback];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AspNetUsersFeedback]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FeedbackSet] DROP CONSTRAINT [FK_AspNetUsersFeedback];
 GO
 
 -- --------------------------------------------------
@@ -37,11 +52,23 @@ GO
 IF OBJECT_ID(N'[dbo].[AspNetUserLogins]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AspNetUserLogins];
 GO
-IF OBJECT_ID(N'[dbo].[AspNetUserRoles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AspNetUserRoles];
-GO
 IF OBJECT_ID(N'[dbo].[AspNetUsers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AspNetUsers];
+GO
+IF OBJECT_ID(N'[dbo].[BookingSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BookingSet];
+GO
+IF OBJECT_ID(N'[dbo].[VetsSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[VetsSet];
+GO
+IF OBJECT_ID(N'[dbo].[PetsSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PetsSet];
+GO
+IF OBJECT_ID(N'[dbo].[FeedbackSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FeedbackSet];
+GO
+IF OBJECT_ID(N'[dbo].[AspNetUserRoles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AspNetUserRoles];
 GO
 
 -- --------------------------------------------------
@@ -83,11 +110,10 @@ GO
 -- Creating table 'BookingSet'
 CREATE TABLE [dbo].[BookingSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Date] nvarchar(max)  NOT NULL,
+    [Date] datetime  NOT NULL,
     [Descirption] nvarchar(max)  NOT NULL,
     [AspNetUsersId] nvarchar(128)  NOT NULL,
-    [VetsId] int  NOT NULL,
-    [Feedback_Id] int  NOT NULL
+    [VetsId] int  NOT NULL
 );
 GO
 
@@ -97,7 +123,8 @@ CREATE TABLE [dbo].[VetsSet] (
     [FirstName] nvarchar(max)  NOT NULL,
     [LastName] nvarchar(max)  NOT NULL,
     [Speciality] nvarchar(max)  NOT NULL,
-    [Location] nvarchar(max)  NOT NULL
+    [Lon] nvarchar(max)  NOT NULL,
+    [Lat] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -115,8 +142,10 @@ GO
 -- Creating table 'FeedbackSet'
 CREATE TABLE [dbo].[FeedbackSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Rating] nvarchar(max)  NOT NULL,
-    [Comments] nvarchar(max)  NOT NULL
+    [Rating] int  NOT NULL,
+    [Comments] nvarchar(max)  NOT NULL,
+    [BookingId] int  NOT NULL,
+    [AspNetUsersId] nvarchar(128)  NOT NULL
 );
 GO
 
@@ -222,21 +251,6 @@ ON [dbo].[AspNetUserRoles]
     ([AspNetUsers_Id]);
 GO
 
--- Creating foreign key on [Feedback_Id] in table 'BookingSet'
-ALTER TABLE [dbo].[BookingSet]
-ADD CONSTRAINT [FK_BookingFeedback]
-    FOREIGN KEY ([Feedback_Id])
-    REFERENCES [dbo].[FeedbackSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_BookingFeedback'
-CREATE INDEX [IX_FK_BookingFeedback]
-ON [dbo].[BookingSet]
-    ([Feedback_Id]);
-GO
-
 -- Creating foreign key on [AspNetUsersId] in table 'BookingSet'
 ALTER TABLE [dbo].[BookingSet]
 ADD CONSTRAINT [FK_AspNetUsersBooking]
@@ -280,6 +294,36 @@ GO
 CREATE INDEX [IX_FK_VetsBooking]
 ON [dbo].[BookingSet]
     ([VetsId]);
+GO
+
+-- Creating foreign key on [BookingId] in table 'FeedbackSet'
+ALTER TABLE [dbo].[FeedbackSet]
+ADD CONSTRAINT [FK_BookingFeedback]
+    FOREIGN KEY ([BookingId])
+    REFERENCES [dbo].[BookingSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_BookingFeedback'
+CREATE INDEX [IX_FK_BookingFeedback]
+ON [dbo].[FeedbackSet]
+    ([BookingId]);
+GO
+
+-- Creating foreign key on [AspNetUsersId] in table 'FeedbackSet'
+ALTER TABLE [dbo].[FeedbackSet]
+ADD CONSTRAINT [FK_AspNetUsersFeedback]
+    FOREIGN KEY ([AspNetUsersId])
+    REFERENCES [dbo].[AspNetUsers]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUsersFeedback'
+CREATE INDEX [IX_FK_AspNetUsersFeedback]
+ON [dbo].[FeedbackSet]
+    ([AspNetUsersId]);
 GO
 
 -- --------------------------------------------------

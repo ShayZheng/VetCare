@@ -24,7 +24,6 @@ namespace A1Final.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Speciality { get; set; }
-        public string Location { get; set; }
         public string Lon { get; set; }
         public string Lat { get; set; }
     

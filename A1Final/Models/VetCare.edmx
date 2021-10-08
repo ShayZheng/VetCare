@@ -99,7 +99,8 @@
     <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Speciality" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Lon" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Lat" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PetsSet">
     <Key>
@@ -349,7 +350,6 @@
           <Property Name="FirstName" Type="String" Nullable="false" />
           <Property Name="LastName" Type="String" Nullable="false" />
           <Property Name="Speciality" Type="String" Nullable="false" />
-          <Property Name="Location" Type="String" Nullable="false" />
           <NavigationProperty Name="Booking" Relationship="Model.VetsBooking" FromRole="Vets" ToRole="Booking" />
           <Property Name="Lon" Type="String" Nullable="false" />
           <Property Name="Lat" Type="String" Nullable="false" />
@@ -497,7 +497,8 @@
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="Speciality" ColumnName="Speciality" />
-          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Lon" ColumnName="Lon" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

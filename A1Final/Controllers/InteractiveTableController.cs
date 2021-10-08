@@ -17,6 +17,7 @@ namespace A1Final.Controllers
             List<AspNetUsers> users = en.AspNetUsers.ToList();
             List<Vets> vets = en.VetsSet.ToList();
 
+            //validate the table data, if it is null then return the error page and redirect to the home page.
             var interactivetable = from b in bookingnames
                                    join u in users on b.AspNetUsersId equals u.Id into table1
                                    from u in table1.DefaultIfEmpty()

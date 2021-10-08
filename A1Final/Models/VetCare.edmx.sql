@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/01/2021 04:10:45
+-- Date Created: 10/08/2021 21:31:56
 -- Generated from EDMX file: C:\Users\yingzheng\source\repos\A1Final\A1Final\Models\VetCare.edmx
 -- --------------------------------------------------
 
@@ -123,7 +123,8 @@ CREATE TABLE [dbo].[VetsSet] (
     [FirstName] nvarchar(max)  NOT NULL,
     [LastName] nvarchar(max)  NOT NULL,
     [Speciality] nvarchar(max)  NOT NULL,
-    [Location] nvarchar(max)  NOT NULL
+    [Lon] nvarchar(max)  NOT NULL,
+    [Lat] nvarchar(max)  NOT NULL
 );
 GO
 
