@@ -4,4 +4,14 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<p>VetCare is all about professional vets for your loving pets.</p>
+
+@*Image reference:https://pixabay.com/zh/photos/dog-veterinary-pet-animal-clinic-1912874/*@
+
+<img srcset="~/Image/Vets400.jpg 480w,
+             ~/Image/Vets800.jpg 800w"
+     sizes="(max-width: 600px) 480px,
+            800px"
+     src="~/Image/Vets.jpg"
+     @*No image would show this*@
+     alt="Loving and Professional Vets ">

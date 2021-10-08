@@ -404,6 +404,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\Vets.jpg" />
+    <Content Include="Image\Vets400.jpg" />
+    <Content Include="Image\Vets800.jpg" />
     <Content Include="Models\VetCare.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>VetCare.edmx</DependentUpon>
