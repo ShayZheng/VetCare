@@ -11,14 +11,20 @@ namespace A1Final.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Pets
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Type { get; set; }
+        [Range(0,99)]
         public string Age { get; set; }
+        [Required]
         public string Gender { get; set; }
+       
         public string AspNetUsersId { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }

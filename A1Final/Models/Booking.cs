@@ -11,7 +11,8 @@ namespace A1Final.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Booking
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +22,9 @@ namespace A1Final.Models
         }
     
         public int Id { get; set; }
+        [Required]
         public System.DateTime Date { get; set; }
+        [Required]
         public string Descirption { get; set; }
         public string AspNetUsersId { get; set; }
         public int VetsId { get; set; }

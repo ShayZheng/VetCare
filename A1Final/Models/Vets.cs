@@ -32,7 +32,7 @@ namespace A1Final.Models
         [Range(-90,90)]
         public decimal Latitude { get; set; }
         [Required]
-        [Range(-90, 90)]
+        [Range(-180, 180)]
         public decimal Longitude { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
