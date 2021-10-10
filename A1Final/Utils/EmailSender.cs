@@ -5,6 +5,7 @@ using System.Web;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.IO;
 
 namespace A1Final.Utils
 {
@@ -13,7 +14,7 @@ namespace A1Final.Utils
         // Please use your API KEY here.
         private const String API_KEY = "YOUR API KEY HERE";
 
-        public void Send(String toEmail, String subject, String contents)
+        public void Send(String toEmail, String subject, String contents, HttpPostedFileBase fileUploader)
         {
             //var client = new SendGridClient(API_KEY);
             //var from = new EmailAddress("noreply@localhost.com", "FIT5032 Example Email User");
@@ -43,15 +44,25 @@ namespace A1Final.Utils
                 Body = contents,
                 IsBodyHtml = true,
             };
+            // Add attachment into mailMessage
+            if (fileUploader != null)
+            {
+                string fileName = Path.GetFileName(fileUploader.FileName);
+                var attachment = new Attachment(fileUploader.InputStream, fileName);
+                mailMessage.Attachments.Add(attachment);
+                
+            }
+            
+            mailMessage.To.Add(toEmail);
+  
+            client.Send(mailMessage);
             
             // Add attachment into mailMessage
-            var attachment = new System.Net.Mail.Attachment("C:\\Users\\yingzheng\\source\\repos\\A1Final\\Vets.jpg", MediaTypeNames.Image.Jpeg);
+            //var attachment = new System.Net.Mail.Attachment("C:\\Users\\yingzheng\\source\\repos\\A1Final\\Vets.jpg", MediaTypeNames.Image.Jpeg);
 
-            mailMessage.Attachments.Add(attachment);
-            mailMessage.To.Add(toEmail);
-
-            // send the mailMessage with attachment
-            client.Send(mailMessage);
+            //mailMessage.Attachments.Add(attachment);
+            //mailMessage.To.Add(toEmail);
+            
         }
     }
 }

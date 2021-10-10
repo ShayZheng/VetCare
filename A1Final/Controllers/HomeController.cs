@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -34,7 +37,7 @@ namespace A1Final.Controllers
         }
 
         [HttpPost]
-        public ActionResult Send_Email(Models.SendEmailViewModel model)
+        public ActionResult Send_Email(Models.SendEmailViewModel model, HttpPostedFileBase fileUploader)
         {
             if (ModelState.IsValid)
             {
@@ -44,8 +47,37 @@ namespace A1Final.Controllers
                     String subject = model.Subject;
                     String contents = model.Contents;
 
-                    Utils.EmailSender es = new Utils.EmailSender();
-                    es.Send(toEmail, subject, contents);
+                    //Utils.EmailSender es = new Utils.EmailSender();
+
+
+                    var client = new SmtpClient("smtp.mailtrap.io", 2525)
+                    {
+                        Credentials = new NetworkCredential("2ad108d5eaa64b", "a77e262be93e25"),
+                        EnableSsl = true
+                    };
+
+                    var plainTextContent = contents;
+
+                    //Add a mailmessage which includes from,subject and body.
+                    var mailMessage = new MailMessage
+                    {
+                        From = new MailAddress("from@example.com"),
+                        Subject = subject,
+                        Body = contents,
+                        IsBodyHtml = true,
+                    };
+                    // Add attachment into mailMessage
+                    if (fileUploader != null)
+                    {
+                        string fileName = Path.GetFileName(fileUploader.FileName);
+                        var attachment = new Attachment(fileUploader.InputStream, fileName);
+                        mailMessage.Attachments.Add(attachment);
+                    }
+
+                    mailMessage.To.Add(toEmail);
+
+                    client.Send(mailMessage);
+                    //es.Send(toEmail, subject, contents, fileUploader);
 
                     ViewBag.Result = "Email has been send.";
 
