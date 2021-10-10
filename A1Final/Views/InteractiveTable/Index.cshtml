@@ -56,55 +56,60 @@ else
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.userdetails.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.userdetails.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.bookingdetails.AspNetUsersId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.bookingdetails.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.bookingdetails.Descirption)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.vetdetails.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.vetdetails.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.vetdetails.Speciality)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.vetdetails.Latitude)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.vetdetails.Longitude)
-                </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.userdetails.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.userdetails.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bookingdetails.AspNetUsersId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bookingdetails.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bookingdetails.Descirption)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vetdetails.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vetdetails.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vetdetails.Speciality)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vetdetails.Latitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vetdetails.Longitude)
+                    </td>
 
-            </tr>
+                </tr>
             }
         </tbody>
     </table>
 
-    
+
 }
 
 @section Scripts {
-        
-        <script>
-            $(document).ready(function ()
-            {
-                $("#interactive").DataTable();
-            });
-        </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#interactive").DataTable();
+        });
+    </script>
     
+    <script src="~/Scripts/notify.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.notify("Welcome Admin,Here are booking details for all users", "success");
+        });
+    </script>
 }
 
 

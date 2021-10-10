@@ -47,9 +47,6 @@ namespace A1Final.Controllers
                     String subject = model.Subject;
                     String contents = model.Contents;
 
-                    //Utils.EmailSender es = new Utils.EmailSender();
-
-
                     var client = new SmtpClient("smtp.mailtrap.io", 2525)
                     {
                         Credentials = new NetworkCredential("2ad108d5eaa64b", "a77e262be93e25"),

@@ -4,9 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-
 <h2>Send Email</h2>
 <fieldset>
     @using (@Html.BeginForm("Send_Email", "Home", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
@@ -24,47 +21,26 @@
 
         <table>
             <tr>
-                <td>
-                    To:
-                </td>
-                <td>
-                    @Html.TextBoxFor(m => m.ToEmail)
-                </td>
+                <td>To:</td>
+                <td>@Html.TextBoxFor(m => m.ToEmail)</td>
             </tr>
-            <tr></tr>
             <tr>
-                <td>
-                    Subject:
-                </td>
-                <td>
-                    @Html.TextBoxFor(m => m.Subject)
-                </td>
+                <td>Subject:</td>
+                <td>@Html.TextBoxFor(m => m.Subject)</td>
             </tr>
-            <tr></tr>
             <tr>
-                <td>
-                    Body:
-                </td>
-                <td>
-                    @Html.TextAreaFor(m => m.Contents)
-                </td>
+                <td>Body:</td>
+                <td>@Html.TextAreaFor(m => m.Contents)</td>
             </tr>
-            <tr></tr>
             <tr>
-                <td>
-                    Attachment
-                </td>
-                <td>
-                    <input type="file" name="fileUploader" />
-                </td>
+                <td>Attachment</td>
+                <td><input type="file" name="fileUploader" /></td>
             </tr>
 
         </table>
 
-            }
-        </fieldset>
-
-<h2>View</h2>
+     }
+ </fieldset>
 
 
 @*@using (Html.BeginForm())
