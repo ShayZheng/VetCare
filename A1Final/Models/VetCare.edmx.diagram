@@ -13,12 +13,14 @@
         <EntityTypeShape EntityType="Model.Booking" Width="1.5" PointX="3.75" PointY="1.5" />
         <EntityTypeShape EntityType="Model.Vets" Width="1.5" PointX="0.5" PointY="2.875" />
         <EntityTypeShape EntityType="Model.Pets" Width="1.5" PointX="6.875" PointY="6" />
-        <EntityTypeShape EntityType="Model.Feedback" Width="1.5" PointX="3.875" PointY="6" />
+        <EntityTypeShape EntityType="Model.Feedback" Width="1.5" PointX="4.25" PointY="6.875" />
         <AssociationConnector Association="Model.AspNetUsersBooking" />
         <AssociationConnector Association="Model.AspNetUsersPets" />
         <AssociationConnector Association="Model.VetsBooking" />
-        <AssociationConnector Association="Model.BookingFeedback" />
-        <AssociationConnector Association="Model.AspNetUsersFeedback" />
+        <AssociationConnector Association="Model.AspNetUsersFeedback" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="Model.VetsFeedback" ManuallyRouted="false" >
+        </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

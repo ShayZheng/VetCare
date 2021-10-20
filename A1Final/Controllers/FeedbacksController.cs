@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using A1Final.Models;
-using Microsoft.AspNet.Identity;
 
 namespace A1Final.Controllers
 {
@@ -16,14 +15,10 @@ namespace A1Final.Controllers
         private Entities db = new Entities();
 
         // GET: Feedbacks
-        [Authorize]
         public ActionResult Index()
         {
-            var userId = User.Identity.GetUserId();
-            var feedbacks = db.FeedbackSet.Where(f => f.AspNetUsersId == userId).ToList();
-            return View(feedbacks);
-            //var feedbackSet = db.FeedbackSet.Include(f => f.Booking).Include(f => f.AspNetUsers);
-            //return View(feedbackSet.ToList());
+            var feedbackSet = db.FeedbackSet.Include(f => f.AspNetUsers).Include(f => f.Vets);
+            return View(feedbackSet.ToList());
         }
 
         // GET: Feedbacks/Details/5
@@ -44,8 +39,8 @@ namespace A1Final.Controllers
         // GET: Feedbacks/Create
         public ActionResult Create()
         {
-            ViewBag.BookingId = new SelectList(db.BookingSet, "Id", "Descirption");
             ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.VetsId = new SelectList(db.VetsSet, "Id", "FirstName");
             return View();
         }
 
@@ -54,12 +49,8 @@ namespace A1Final.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Create([Bind(Include = "Id,Rating,Comments,BookingId")] Feedback feedback)
+        public ActionResult Create([Bind(Include = "Id,Rating,Comments,AspNetUsersId,VetsId")] Feedback feedback)
         {
-            feedback.AspNetUsersId = User.Identity.GetUserId();
-            ModelState.Clear();
-            TryValidateModel(feedback);
             if (ModelState.IsValid)
             {
                 db.FeedbackSet.Add(feedback);
@@ -67,8 +58,8 @@ namespace A1Final.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BookingId = new SelectList(db.BookingSet, "Id", "Descirption", feedback.BookingId);
             ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", feedback.AspNetUsersId);
+            ViewBag.VetsId = new SelectList(db.VetsSet, "Id", "FirstName", feedback.VetsId);
             return View(feedback);
         }
 
@@ -84,8 +75,8 @@ namespace A1Final.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.BookingId = new SelectList(db.BookingSet, "Id", "Descirption", feedback.BookingId);
             ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", feedback.AspNetUsersId);
+            ViewBag.VetsId = new SelectList(db.VetsSet, "Id", "FirstName", feedback.VetsId);
             return View(feedback);
         }
 
@@ -94,7 +85,7 @@ namespace A1Final.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Rating,Comments,BookingId,AspNetUsersId")] Feedback feedback)
+        public ActionResult Edit([Bind(Include = "Id,Rating,Comments,AspNetUsersId,VetsId")] Feedback feedback)
         {
             if (ModelState.IsValid)
             {
@@ -102,8 +93,8 @@ namespace A1Final.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BookingId = new SelectList(db.BookingSet, "Id", "Descirption", feedback.BookingId);
             ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email", feedback.AspNetUsersId);
+            ViewBag.VetsId = new SelectList(db.VetsSet, "Id", "FirstName", feedback.VetsId);
             return View(feedback);
         }
 

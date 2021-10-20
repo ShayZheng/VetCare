@@ -38,12 +38,12 @@
       <End Role="Vets" EntitySet="VetsSet" />
       <End Role="Booking" EntitySet="BookingSet" />
     </AssociationSet>
-    <AssociationSet Name="BookingFeedback" Association="Model.Store.BookingFeedback">
-      <End Role="Booking" EntitySet="BookingSet" />
-      <End Role="Feedback" EntitySet="FeedbackSet" />
-    </AssociationSet>
     <AssociationSet Name="AspNetUsersFeedback" Association="Model.Store.AspNetUsersFeedback">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Feedback" EntitySet="FeedbackSet" />
+    </AssociationSet>
+    <AssociationSet Name="VetsFeedback" Association="Model.Store.VetsFeedback">
+      <End Role="Vets" EntitySet="VetsSet" />
       <End Role="Feedback" EntitySet="FeedbackSet" />
     </AssociationSet>
   </EntityContainer>
@@ -98,7 +98,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Speciality" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Latitude" Type="decimal" Nullable="false" Precision="10" Scale="8" />
     <Property Name="Longitude" Type="decimal" Nullable="false" Precision="11" Scale="8" />
   </EntityType>
@@ -119,9 +119,9 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Rating" Type="int" Nullable="false" />
-    <Property Name="Comments" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BookingId" Type="int" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar(max)" Nullable="true" />
     <Property Name="AspNetUsersId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="VetsId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="AspNetUserRoles">
     <Key>
@@ -181,18 +181,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="BookingFeedback">
-    <End Role="Booking" Type="Model.Store.BookingSet" Multiplicity="1" />
-    <End Role="Feedback" Type="Model.Store.FeedbackSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Booking">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Feedback">
-        <PropertyRef Name="BookingId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="AspNetUsersFeedback">
     <End Role="AspNetUsers" Type="Model.Store.AspNetUsers" Multiplicity="1" />
     <End Role="Feedback" Type="Model.Store.FeedbackSet" Multiplicity="*" />
@@ -202,6 +190,18 @@
       </Principal>
       <Dependent Role="Feedback">
         <PropertyRef Name="AspNetUsersId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VetsFeedback">
+    <End Role="Vets" Type="Model.Store.VetsSet" Multiplicity="1" />
+    <End Role="Feedback" Type="Model.Store.FeedbackSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vets">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="VetsId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -320,12 +320,12 @@
             <End Role="Vets" EntitySet="VetsSet" />
             <End Role="Booking" EntitySet="BookingSet" />
           </AssociationSet>
-          <AssociationSet Name="BookingFeedback" Association="Model.BookingFeedback">
-            <End Role="Booking" EntitySet="BookingSet" />
-            <End Role="Feedback" EntitySet="FeedbackSet" />
-          </AssociationSet>
           <AssociationSet Name="AspNetUsersFeedback" Association="Model.AspNetUsersFeedback">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Feedback" EntitySet="FeedbackSet" />
+          </AssociationSet>
+          <AssociationSet Name="VetsFeedback" Association="Model.VetsFeedback">
+            <End Role="Vets" EntitySet="VetsSet" />
             <End Role="Feedback" EntitySet="FeedbackSet" />
           </AssociationSet>
         </EntityContainer>
@@ -340,7 +340,6 @@
           <Property Name="AspNetUsersId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Vets" Relationship="Model.VetsBooking" FromRole="Booking" ToRole="Vets" />
           <Property Name="VetsId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Feedback" Relationship="Model.BookingFeedback" FromRole="Booking" ToRole="Feedback" />
         </EntityType>
         <EntityType Name="Vets">
           <Key>
@@ -349,10 +348,11 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" Nullable="false" />
           <Property Name="LastName" Type="String" Nullable="false" />
-          <Property Name="Speciality" Type="String" Nullable="false" />
+          <Property Name="Location" Type="String" Nullable="false" />
           <NavigationProperty Name="Booking" Relationship="Model.VetsBooking" FromRole="Vets" ToRole="Booking" />
           <Property Name="Latitude" Type="Decimal" Nullable="false" Precision="10" Scale="8" />
           <Property Name="Longitude" Type="Decimal" Nullable="false" Precision="11" Scale="8" />
+          <NavigationProperty Name="Feedback" Relationship="Model.VetsFeedback" FromRole="Vets" ToRole="Feedback" />
         </EntityType>
         <EntityType Name="Pets">
           <Key>
@@ -372,11 +372,11 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Rating" Type="Int32" Nullable="false" />
-          <Property Name="Comments" Type="String" Nullable="false" />
-          <NavigationProperty Name="Booking" Relationship="Model.BookingFeedback" FromRole="Feedback" ToRole="Booking" />
-          <Property Name="BookingId" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" Nullable="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="Model.AspNetUsersFeedback" FromRole="Feedback" ToRole="AspNetUsers" />
-          <Property Name="AspNetUsersId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AspNetUsersId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Vets" Relationship="Model.VetsFeedback" FromRole="Feedback" ToRole="Vets" />
+          <Property Name="VetsId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="AspNetUsersBooking">
           <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
@@ -414,18 +414,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="BookingFeedback">
-          <End Type="Model.Booking" Role="Booking" Multiplicity="1" />
-          <End Type="Model.Feedback" Role="Feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Booking">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Feedback">
-              <PropertyRef Name="BookingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUsersFeedback">
           <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
           <End Type="Model.Feedback" Role="Feedback" Multiplicity="*" />
@@ -435,6 +423,18 @@
             </Principal>
             <Dependent Role="Feedback">
               <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VetsFeedback">
+          <End Type="Model.Vets" Role="Vets" Multiplicity="1" />
+          <End Type="Model.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="VetsId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -496,7 +496,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Speciality" ColumnName="Speciality" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
           <ScalarProperty Name="Latitude" ColumnName="Latitude" />
           <ScalarProperty Name="Longitude" ColumnName="Longitude" />
         </MappingFragment>
@@ -520,8 +520,8 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Rating" ColumnName="Rating" />
           <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
           <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
+          <ScalarProperty Name="VetsId" ColumnName="VetsId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

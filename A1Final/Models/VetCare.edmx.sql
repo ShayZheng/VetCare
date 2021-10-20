@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/09/2021 00:49:54
+-- Date Created: 10/21/2021 00:26:33
 -- Generated from EDMX file: C:\Users\yingzheng\source\repos\A1Final\A1Final\Models\VetCare.edmx
 -- --------------------------------------------------
 
@@ -122,7 +122,7 @@ CREATE TABLE [dbo].[VetsSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [FirstName] nvarchar(max)  NOT NULL,
     [LastName] nvarchar(max)  NOT NULL,
-    [Speciality] nvarchar(max)  NOT NULL,
+    [Location] nvarchar(max)  NOT NULL,
     [Latitude] decimal(10,8)  NOT NULL,
     [Longitude] decimal(11,8)  NOT NULL
 );
@@ -143,9 +143,9 @@ GO
 CREATE TABLE [dbo].[FeedbackSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Rating] int  NOT NULL,
-    [Comments] nvarchar(max)  NOT NULL,
-    [BookingId] int  NOT NULL,
-    [AspNetUsersId] nvarchar(128)  NOT NULL
+    [Comments] nvarchar(max)  NULL,
+    [AspNetUsersId] nvarchar(128)  NOT NULL,
+    [VetsId] int  NOT NULL
 );
 GO
 
@@ -296,21 +296,6 @@ ON [dbo].[BookingSet]
     ([VetsId]);
 GO
 
--- Creating foreign key on [BookingId] in table 'FeedbackSet'
-ALTER TABLE [dbo].[FeedbackSet]
-ADD CONSTRAINT [FK_BookingFeedback]
-    FOREIGN KEY ([BookingId])
-    REFERENCES [dbo].[BookingSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_BookingFeedback'
-CREATE INDEX [IX_FK_BookingFeedback]
-ON [dbo].[FeedbackSet]
-    ([BookingId]);
-GO
-
 -- Creating foreign key on [AspNetUsersId] in table 'FeedbackSet'
 ALTER TABLE [dbo].[FeedbackSet]
 ADD CONSTRAINT [FK_AspNetUsersFeedback]
@@ -324,6 +309,21 @@ GO
 CREATE INDEX [IX_FK_AspNetUsersFeedback]
 ON [dbo].[FeedbackSet]
     ([AspNetUsersId]);
+GO
+
+-- Creating foreign key on [VetsId] in table 'FeedbackSet'
+ALTER TABLE [dbo].[FeedbackSet]
+ADD CONSTRAINT [FK_VetsFeedback]
+    FOREIGN KEY ([VetsId])
+    REFERENCES [dbo].[VetsSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_VetsFeedback'
+CREATE INDEX [IX_FK_VetsFeedback]
+ON [dbo].[FeedbackSet]
+    ([VetsId]);
 GO
 
 -- --------------------------------------------------

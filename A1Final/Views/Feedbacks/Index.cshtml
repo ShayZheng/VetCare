@@ -19,10 +19,10 @@
             @Html.DisplayNameFor(model => model.Comments)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Booking.Descirption)
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+            @Html.DisplayNameFor(model => model.Vets.FirstName)
         </th>
         <th></th>
     </tr>
@@ -36,10 +36,10 @@
             @Html.DisplayFor(modelItem => item.Comments)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Booking.Descirption)
+            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+            @Html.DisplayFor(modelItem => item.Vets.FirstName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

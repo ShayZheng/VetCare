@@ -650,11 +650,6 @@
     <Content Include="Views\Pets\Details.cshtml" />
     <Content Include="Views\Pets\Edit.cshtml" />
     <Content Include="Views\Pets\Index.cshtml" />
-    <Content Include="Views\Feedbacks\Create.cshtml" />
-    <Content Include="Views\Feedbacks\Delete.cshtml" />
-    <Content Include="Views\Feedbacks\Details.cshtml" />
-    <Content Include="Views\Feedbacks\Edit.cshtml" />
-    <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Home\Send_Email.cshtml" />
     <Content Include="Views\InteractiveTable\Index.cshtml" />
     <Content Include="Views\Bookings\Error.cshtml" />
@@ -663,6 +658,11 @@
     <Content Include="Views\Vets\Details.cshtml" />
     <Content Include="Views\Vets\Edit.cshtml" />
     <Content Include="Views\Vets\Index.cshtml" />
+    <Content Include="Views\Feedbacks\Create.cshtml" />
+    <Content Include="Views\Feedbacks\Delete.cshtml" />
+    <Content Include="Views\Feedbacks\Details.cshtml" />
+    <Content Include="Views\Feedbacks\Edit.cshtml" />
+    <Content Include="Views\Feedbacks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
