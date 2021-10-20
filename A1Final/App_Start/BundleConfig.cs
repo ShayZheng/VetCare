@@ -22,7 +22,11 @@ namespace A1Final
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/respond.js"));
+
+            // I added the vets.js to the bundle called mapbox.
+            bundles.Add(new ScriptBundle("~/bundles/mapbox").Include("~/Scripts/vets.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-cerulean.css",
