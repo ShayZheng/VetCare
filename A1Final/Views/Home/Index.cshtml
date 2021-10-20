@@ -1,31 +1,31 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+<link href="~/Content/StyleSheet1.css" rel="stylesheet" />
 <div class="jumbotron">
     <h1>VetCare Application</h1>
-    <p class="lead">VetCare creates a friendly environment for you between your lovely pets and professional vets</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    
+    @*Image reference:https://pixabay.com/zh/photos/dog-puppy-canine-vet-veterinarian-91765/*@
+
+    <img src="~/Image/dog.jpg" style="height:470px"
+         @*No image would show this*@
+         alt="A vet is doing body check for a puppy dog">
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
+    <div class="col-md-2"></div>
+    <div class="col-md-3" id="example">
+        <h2>View the Vets</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            VetCare creates a friendly environment for you between your lovely pets and professional vets.
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p><a class="btn btn-default" href="https://localhost:44326/Vets">Pro Vets &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="col-md-1"></div>
+    <div class="col-md-3" id="example">
+        <h2>Booking Here</h2>
+        <p>You can easily make a booking for your loving pets here.Find out more please click button below </p>
+        <p><a class="btn btn-default" href="https://localhost:44326/Bookings">Make a Booking &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+    <div class="col-md-3"></div>
 </div>
