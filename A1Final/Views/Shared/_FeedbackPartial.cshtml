@@ -8,19 +8,22 @@
             Comments: @Model.Comments
         </td>
     </tr>
+    
     @*Here will show the rating as star*@
     <tr>
         <td>
+            @*here will show the rating as gray star*@
             @for (int i = 0; i < Model.Rating; i++)
             {
                 <span class="glyphicon glyphicon-star"></span>
             }
+            @*here wiil show the rating background as white star*@
             @for (int i = @Model.Rating; i < 5; i++)
             {
                 <span class="glyphicon glyphicon-star-empty"></span>
             }
 
-            @*Rating: @Model.Rating*@
+            
         </td>
     </tr>
 

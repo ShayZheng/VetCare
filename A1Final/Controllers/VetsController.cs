@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using A1Final.Models;
 using A1Final.ViewModel;
+using Microsoft.AspNet.Identity;
 
 namespace A1Final.Controllers
 {
@@ -21,6 +22,7 @@ namespace A1Final.Controllers
         }
 
         // GET: Vets
+        //Show Vets' details by using ViewModel
         public ActionResult Index()
         {
             
@@ -159,7 +161,26 @@ namespace A1Final.Controllers
 
                                                     }).ToList();
 
+            ViewBag.VetsId = vetsid;
             return View(listofFeedback);
+        }
+
+        [HttpPost]
+        public ActionResult AddComment(int vetsid, int rating, string vetComment)
+        {
+            Feedback objFeedback = new Feedback();
+            objFeedback.VetsId = vetsid;
+            objFeedback.Rating = rating;
+            objFeedback.Comments = vetComment;
+            //Get current user id
+            string currentUserId = User.Identity.GetUserId();
+            
+            objFeedback.AspNetUsersId = currentUserId;
+            db.FeedbackSet.Add(objFeedback);
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
         }
     }
 }
