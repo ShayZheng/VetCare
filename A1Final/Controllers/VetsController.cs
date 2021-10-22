@@ -56,6 +56,7 @@ namespace A1Final.Controllers
         }
 
         // GET: Vets/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -66,6 +67,7 @@ namespace A1Final.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Location,Latitude,Longitude")] Vets vets)
         {
             if (ModelState.IsValid)
@@ -79,6 +81,7 @@ namespace A1Final.Controllers
         }
 
         // GET: Vets/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -98,6 +101,7 @@ namespace A1Final.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Location,Latitude,Longitude")] Vets vets)
         {
             if (ModelState.IsValid)
@@ -110,6 +114,7 @@ namespace A1Final.Controllers
         }
 
         // GET: Vets/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -127,6 +132,7 @@ namespace A1Final.Controllers
         // POST: Vets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Vets vets = db.VetsSet.Find(id);

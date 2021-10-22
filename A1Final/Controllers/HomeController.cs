@@ -72,8 +72,8 @@ namespace A1Final.Controllers
                     }
 
                     mailMessage.To.Add(toEmail);
-
                     client.Send(mailMessage);
+
                     //es.Send(toEmail, subject, contents, fileUploader);
 
                     ViewBag.Result = "Email has been send.";

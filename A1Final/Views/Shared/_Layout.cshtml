@@ -53,6 +53,7 @@
         }*@
 
                     <li>@Html.ActionLink("Send Email", "Send_Email", "Home")</li>
+
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Interactive Table", "Index", "InteractiveTable")</li>
