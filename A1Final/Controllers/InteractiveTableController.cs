@@ -10,6 +10,7 @@ namespace A1Final.Controllers
     public class InteractiveTableController : Controller
     {
         // GET: InteractiveTable
+        [Authorize(Roles ="Admin")]
         public ActionResult Index()
         {
             Entities en = new Entities();

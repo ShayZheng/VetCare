@@ -48,13 +48,19 @@
                     }
 
                     @*@if (User.Identity.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Feedbacks", "Index", "Feedbacks")</li>
-                    }*@
+        {
+            <li>@Html.ActionLink("Feedbacks", "Index", "Feedbacks")</li>
+        }*@
 
                     <li>@Html.ActionLink("Send Email", "Send_Email", "Home")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Interactive Table", "Index", "InteractiveTable")</li>
+                    }
+                    
 
-                    <li>@Html.ActionLink("Interactive Table", "Index", "InteractiveTable")</li>
+                    
+
 
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>

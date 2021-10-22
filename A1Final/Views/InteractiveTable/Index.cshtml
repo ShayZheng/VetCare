@@ -9,7 +9,14 @@
 
 <h2>Interacitive Data with User, Booking and Vets tables</h2>
 
+@*@if (User.IsInRole("Admin"))
+            {
 
+            }
+            else
+            {
+                alert("Please select a Rating.");
+            }*@
 @if (Model == null || Model.Count() == 0)
 {
     <p>There is no records</p>
