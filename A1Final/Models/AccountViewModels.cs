@@ -79,6 +79,9 @@ namespace A1Final.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        // This is for role
+        public string RoleName { get; set; }
     }
 
     public class ResetPasswordViewModel

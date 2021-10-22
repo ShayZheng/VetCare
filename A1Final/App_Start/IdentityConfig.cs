@@ -88,6 +88,28 @@ namespace A1Final
         }
     }
 
+    //Add application role manager
+    //Reference:https://stackoverflow.com/questions/25417024/no-applicationrolemanager-class-in-my-mvc-5-template
+    public class ApplicationRoleManager : RoleManager<IdentityRole>
+    {
+        public ApplicationRoleManager(IRoleStore<IdentityRole, string> roleStore)
+            : base(roleStore)
+        {
+
+        }
+
+        public static ApplicationRoleManager Create(
+            IdentityFactoryOptions<ApplicationRoleManager> options,
+            IOwinContext context)
+        {
+            var manager = new ApplicationRoleManager(
+                new RoleStore<IdentityRole>(
+                    context.Get<ApplicationDbContext>()));
+
+            return manager;
+        }
+    }
+
     // Configure the application sign-in manager which is used in this application.
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {

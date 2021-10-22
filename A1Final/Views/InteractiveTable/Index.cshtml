@@ -9,99 +9,99 @@
 
 <h2>Interacitive Data with User, Booking and Vets tables</h2>
 
-@*@if (User.IsInRole("Admin"))
-            {
-
-            }
-            else
-            {
-                alert("Please select a Rating.");
-            }*@
-@if (Model == null || Model.Count() == 0)
+@if (User.IsInRole("Admin"))
 {
-    <p>There is no records</p>
-}
-else
+    if (Model == null || Model.Count() == 0)
+    {
+        <p>There is no records</p>
+    }
+    else
 
-{
-    <table class="table" id="interactive">
-        <thead>
-            <tr>
-                <th>
-                    Email
-                </th>
-                <th>
-                    User Id
-                </th>
-                <th>
-                    Booking User Id
-                </th>
-                <th>
-                    Booking Date
-                </th>
-                <th>
-                    Booking Descriptions
-                </th>
-                <th>
-                    Vets First Name
-                </th>
-                <th>
-                    Vets Last Name
-                </th>
-                <th>
-                    Vets Location
-                </th>
-                <th>
-                    Vets Latitude
-                </th>
-                <th>
-                    Vets Longtitude
-                </th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    {
+        <table class="table" id="interactive">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.userdetails.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.userdetails.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.bookingdetails.AspNetUsersId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.bookingdetails.Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.bookingdetails.Descirption)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.vetdetails.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.vetdetails.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.vetdetails.Location)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.vetdetails.Latitude)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.vetdetails.Longitude)
-                    </td>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        User Id
+                    </th>
+                    <th>
+                        Booking User Id
+                    </th>
+                    <th>
+                        Booking Date
+                    </th>
+                    <th>
+                        Booking Descriptions
+                    </th>
+                    <th>
+                        Vets First Name
+                    </th>
+                    <th>
+                        Vets Last Name
+                    </th>
+                    <th>
+                        Vets Location
+                    </th>
+                    <th>
+                        Vets Latitude
+                    </th>
+                    <th>
+                        Vets Longtitude
+                    </th>
 
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.userdetails.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.userdetails.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.bookingdetails.AspNetUsersId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.bookingdetails.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.bookingdetails.Descirption)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.vetdetails.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.vetdetails.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.vetdetails.Location)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.vetdetails.Latitude)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.vetdetails.Longitude)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
 
 
+    }
 }
+else
+{
+    <p>Only Administrator can view this page</p>
+}
+
 
 @section Scripts {
 
@@ -110,7 +110,7 @@ else
             $("#interactive").DataTable();
         });
     </script>
-    
+
     <script src="~/Scripts/notify.min.js"></script>
     <script>
         $(document).ready(function () {
