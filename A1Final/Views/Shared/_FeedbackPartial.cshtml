@@ -1,0 +1,28 @@
+﻿@model A1Final.ViewModel.FeedbackViewModel
+
+
+<table style="width: 100%; border: 1px solid black">
+
+    <tr>
+        <td>
+            Comments: @Model.Comments
+        </td>
+    </tr>
+    @*Here will show the rating as star*@
+    <tr>
+        <td>
+            @for (int i = 0; i < Model.Rating; i++)
+            {
+                <span class="glyphicon glyphicon-star"></span>
+            }
+            @for (int i = @Model.Rating; i < 5; i++)
+            {
+                <span class="glyphicon glyphicon-star-empty"></span>
+            }
+
+            @*Rating: @Model.Rating*@
+        </td>
+    </tr>
+
+
+</table>

@@ -46,11 +46,18 @@ namespace A1Final.Controllers
 
         // GET: Bookings/Create
         [Authorize]
-        public ActionResult Create()
+        public ActionResult Create(String date)
         {
+            Booking booking= new Booking();
+            if ( date == null) 
+            {
+                return RedirectToAction("Index");
+            }
+            DateTime datetime = Convert.ToDateTime(date);
+            booking.Date = datetime;
             ViewBag.AspNetUsersId = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.VetsId = new SelectList(db.VetsSet, "Id", "FirstName");
-            return View();
+            return View(booking);
         }
 
         // POST: Bookings/Create

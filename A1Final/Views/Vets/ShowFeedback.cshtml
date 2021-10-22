@@ -1,0 +1,25 @@
+﻿@model IEnumerable<A1Final.ViewModel.FeedbackViewModel>
+
+@{
+    ViewBag.Title = "ShowFeedback";
+
+}
+
+<h2>Show Feedback</h2>
+
+@foreach (var item in Model)
+{
+    @Html.Partial("_FeedbackPartial", item)
+
+}
+
+<tr>
+    <td>Average Rating</td>
+    <td>@Model.Average(i => i.Rating).ToString("0.00")</td>
+</tr>
+
+
+@using (Html.BeginForm("AddComment", "Vets", FormMethod.Post,new { }))
+{
+
+}

@@ -28,10 +28,20 @@ namespace A1Final
             // I added the vets.js to the bundle called mapbox.
             bundles.Add(new ScriptBundle("~/bundles/mapbox").Include("~/Scripts/vets.js"));
 
+            // for calendar
+            bundles.Add(new ScriptBundle("~/bundles/fullcalendar").Include(
+            "~/Scripts/jquery-3.4.1.min.js",
+            "~/Scripts/moment.min.js",
+            "~/Scripts/fullcalendar/fullcalendar.js",
+            "~/Scripts/calendar.js"
+            ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/bootstrap-cerulean.css",
-                      "~/Content/site.css",
-                      "~/Content/datatables/css/datatables.bootstrap.css"));
+                      "~/Content/bootstrap-datepicker.css",
+                      "~/Content/fullcalendar.css",
+                      "~/Content/site.css"));
         }
     }
 }

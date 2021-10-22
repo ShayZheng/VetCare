@@ -7,17 +7,35 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using A1Final.Models;
+using A1Final.ViewModel;
 
 namespace A1Final.Controllers
 {
     public class VetsController : Controller
     {
-        private Entities db = new Entities();
+        private Entities db;
+
+        public VetsController()
+        {
+            db = new Entities();
+        }
 
         // GET: Vets
         public ActionResult Index()
         {
-            return View(db.VetsSet.ToList());
+            
+            IEnumerable<VetViewModel> listOfVetViewModel = (from obtVet in db.VetsSet
+                                                            select new VetViewModel()
+                                                            {
+                                                                Id = obtVet.Id,
+                                                                FirstName = obtVet.FirstName,
+                                                                LastName = obtVet.LastName,
+                                                                Location = obtVet.Location,
+                                                                Latitude = obtVet.Latitude,
+                                                                Longitude = obtVet.Longitude
+                                                            }).ToList();
+            return View(listOfVetViewModel);
+            //return View(db.VetsSet.ToList());
         }
 
         // GET: Vets/Details/5
@@ -122,6 +140,26 @@ namespace A1Final.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //Reference: https://www.youtube.com/watch?v=1oGxPoTGl0U
+
+
+
+        public ActionResult ShowFeedback(int vetsid)
+        {
+            IEnumerable<FeedbackViewModel> listofFeedback = (from objFeedback in db.FeedbackSet
+                                                    where objFeedback.VetsId == vetsid
+                                                    select new FeedbackViewModel()
+                                                    {
+                                                        VetsId = objFeedback.VetsId,
+                                                        Id = objFeedback.Id,
+                                                        Rating = objFeedback.Rating,
+                                                        Comments = objFeedback.Comments,
+
+                                                    }).ToList();
+
+            return View(listofFeedback);
         }
     }
 }
