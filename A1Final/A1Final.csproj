@@ -199,6 +199,7 @@
     <Compile Include="Models\Booking.cs">
       <DependentUpon>VetCare.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BulkEmailViewModel.cs" />
     <Compile Include="Models\Feedback.cs">
       <DependentUpon>VetCare.tt</DependentUpon>
     </Compile>
@@ -761,6 +762,7 @@
     <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Vets\ShowFeedback.cshtml" />
     <Content Include="Views\Shared\_FeedbackPartial.cshtml" />
+    <Content Include="Views\Home\SendBulkEmail.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

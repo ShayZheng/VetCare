@@ -53,20 +53,23 @@
         }*@
 
                     <li>@Html.ActionLink("Send Email", "Send_Email", "Home")</li>
-
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Send Bulk Email", "SendBulkEmail", "Home")</li>
+                    }
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Interactive Table", "Index", "InteractiveTable")</li>
                     }
-                    
-
-                    
 
 
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
-                </ul>
+
+
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                    </ul>
                 @Html.Partial("_LoginPartial")
                 
             </div>
