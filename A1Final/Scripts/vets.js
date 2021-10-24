@@ -26,7 +26,7 @@ for (i = 0; i < locations.length; i++) {
             "FName": locations[i].FName,
             "LName": locations[i].LName,
             "description": locations[i].description,
-            "icon": "circle-15"
+            "icon": "circle-1"
         },
         "geometry": {
             "type": "Point",
@@ -65,11 +65,14 @@ map.on('load', function () {
 
 
 map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken }));
-// Add navigation
-/*map.addControl(new MapboxDirections({ accessToken: mapboxgl.accessToken }), 'bottom-left');*/
 
 map.addControl(new mapboxgl.NavigationControl());
-    // When a click event occurs on a feature in the places layer, open a popup at the // location of the feature, with description HTML from its properties. 
+// Add navigation
+    /*map.addControl(new MapboxDirections({ accessToken: mapboxgl.accessToken }), 'bottom-left');*/
+
+
+// When a click event occurs on a feature in the places layer, open a popup at the 
+// location of the feature, with description,Vet's name HTML from its properties.
 map.on('click', 'places', function (e) {
     var coordinates = e.features[0].geometry.coordinates.slice(); var description = e.features[0].properties.description;
     var FName = e.features[0].properties.FName; var LName = e.features[0].properties.LName;
