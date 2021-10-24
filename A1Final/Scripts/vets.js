@@ -39,7 +39,7 @@ mapboxgl.accessToken = TOKEN;
 
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
+    style: 'mapbox://styles/mapbox/streets-v10',
     zoom: 11,
     center: [locations[0].longitude, locations[0].latitude]
 });
@@ -66,7 +66,7 @@ map.on('load', function () {
 
 map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken }));
 // Add navigation
-map.addControl(new MapboxDirections({ accessToken: mapboxgl.accessToken }), 'bottom-left');
+/*map.addControl(new MapboxDirections({ accessToken: mapboxgl.accessToken }), 'bottom-left');*/
 
 map.addControl(new mapboxgl.NavigationControl());
     // When a click event occurs on a feature in the places layer, open a popup at the // location of the feature, with description HTML from its properties. 
