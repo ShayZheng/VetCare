@@ -4,12 +4,23 @@
 <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
 <div class="jumbotron">
     <h1>VetCare Application</h1>
-    
+
     @*Image reference:https://pixabay.com/zh/photos/dog-puppy-canine-vet-veterinarian-91765/*@
 
-    <img src="~/Image/dog.jpg" style="height:470px"
-         @*No image would show this*@
+    <img srcset="~/Image/dog-320.jpg 480w,
+       
+             ~/Image/dog-960.jpg 800w"
+         sizes="(max-width: 600px) 480px,
+            800px"
+         src="~/Image/dog-1280.jpg"
+         No image would show this
          alt="A vet is doing body check for a puppy dog">
+
+
+
+    @*<img src="~/Image/dog-640.jpg" 
+    No image would show this
+    alt="A vet is doing body check for a puppy dog">*@
 </div>
 
 <div class="row">

@@ -230,7 +230,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Utils\EmailSender.cs" />
     <Compile Include="ViewModel\FeedbackViewModel.cs" />
     <Compile Include="ViewModel\VetViewModel.cs" />
   </ItemGroup>
@@ -418,6 +417,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\dog-1280.jpg" />
+    <Content Include="Image\dog-320.jpg" />
+    <Content Include="Image\dog-960.jpg" />
     <Content Include="Image\dog.jpg" />
     <Content Include="Image\Vets.jpg" />
     <Content Include="Image\Vets400.jpg" />
@@ -715,7 +717,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Map.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />

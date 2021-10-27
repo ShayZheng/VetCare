@@ -22,11 +22,12 @@ console.log('locations', locations);
 var data = [];
 for (i = 0; i < locations.length; i++) {
     var feature = {
-        "type": "Feature", "properties": {
+        "type": "Feature",
+        "properties": {
             "FName": locations[i].FName,
             "LName": locations[i].LName,
             "description": locations[i].description,
-            "icon": "circle-1"
+            "icon": "circle-15"
         },
         "geometry": {
             "type": "Point",
@@ -62,26 +63,43 @@ map.on('load', function () {
             "icon-allow-overlap": true
     }
     });
+/*    map.addControl(new MapboxDirections({ accessToken: mapboxgl.accessToken }), 'bottom-left');*/
+    const geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        
+       
 
+        marker: {
+            color: 'orange'
+        },
+        mapboxgl: mapboxgl
+    });
 
-map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken }));
+    map.addControl(geocoder, "top-left");
+
+/*map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken }));*/
 
 map.addControl(new mapboxgl.NavigationControl());
 // Add navigation
-    /*map.addControl(new MapboxDirections({ accessToken: mapboxgl.accessToken }), 'bottom-left');*/
+
 
 
 // When a click event occurs on a feature in the places layer, open a popup at the 
 // location of the feature, with description,Vet's name HTML from its properties.
 map.on('click', 'places', function (e) {
-    var coordinates = e.features[0].geometry.coordinates.slice(); var description = e.features[0].properties.description;
-    var FName = e.features[0].properties.FName; var LName = e.features[0].properties.LName;
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+    var FName = e.features[0].properties.FName;
+    var LName = e.features[0].properties.LName;
+
+
 // Ensure that if the map is zoomed out such that multiple // copies of the feature are visible, the popup appears
 // over the copy being pointed to.
 while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
     coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
 }
-new mapboxgl.Popup().setLngLat(coordinates).setHTML(FName,LNAme,description).addTo(map);
+
+    new mapboxgl.Popup().setLngLat(coordinates).setHTML(FName).setHTML(LName).setHTML(description).addTo(map);
 });
 // Change the cursor to a pointer when the mouse is over the places layer.
 map.on('mouseenter', 'places', function () {
@@ -93,4 +111,6 @@ map.on('mouseleave', 'places', function () {
 });
 
 });
+
+
 

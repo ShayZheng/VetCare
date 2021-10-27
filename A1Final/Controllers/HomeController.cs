@@ -26,9 +26,9 @@ namespace A1Final.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Map()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "This is a direction map.";
 
             return View();
         }

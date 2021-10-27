@@ -7,123 +7,127 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-
-
-@*This is for navigation*@
-
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
-@*This is used for the Geocoding Mapbox API*@
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.min.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css' type='text/css'>
-
-@*<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
-<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">*@
-
-@* This is for the mapbox map. *@
-<!--<script src='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js'></script>
-<link href='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />-->
-
-<style>
-    /*body {
-        margin-top: 25px;
-        padding: 0;
-    }*/
-
-    #map {
-        margin-top: 25px;
-        /*position:absolute;*/
-        top: 0;
-        bottom: 0;
-        width: 100%;
-    }
-</style>
-
-
-<div id="map" style="height:500px"></div>
-
-<table class="table">
-    <tr>
-        <th>
-            FirstName
-        </th>
-        <th>
-            LastName
-        </th>
-        <th>
-            Location
-        </th>
-        <th>
-            Latitude
-        </th>
-        <th>
-            Longitude
-        </th>
-        <th>
-            View Feedback
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr class="coordinates">
-            <td class="FName">
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td class="LName">
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td class="description">
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td class="latitude">
-                @Html.DisplayFor(modelItem => item.Latitude)
-            </td>
-            <td class="longitude">
-                @Html.DisplayFor(modelItem => item.Longitude)
-            </td>
-            <td>
-                @Html.ActionLink("Add/View Feedback", "ShowFeedback", new { vetsid = item.Id })
-            </td>
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id });
-                    <p></p>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id });
-                    <p></p>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id });
-                }
-                else
-                {
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
-                }
-            </td>
-            @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>*@
-        </tr>
-    }
-
-</table>
-
-@section Scripts {
-
-    <script src="~/Scripts/vets.js"></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.min.js'></script>
-    @*<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css' type='text/css'>
-
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">*@
-
-
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 }
+
+
+    @*This is for navigation*@
+
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" rel="stylesheet" />
+    @*This is used for the Geocoding Mapbox API*@
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css' type='text/css' />
+
+    @*<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+        <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">*@
+
+    @* This is for the mapbox map. *@
+    <!--<script src='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />-->
+
+    <style>
+            /*body {
+            margin-top: 25px;
+            padding: 0;
+        }*/
+
+            #map {
+                margin-top: 25px;
+                /*position:absolute;*/
+                top: 0;
+                bottom: 0;
+                width: 100%;
+            }
+    </style>
+
+
+    <div id="map" style="height:500px"></div>
+
+    <table class="table">
+        <tr>
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                Location
+            </th>
+            <th>
+                Latitude
+            </th>
+            <th>
+                Longitude
+            </th>
+            <th>
+                View Feedback
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="coordinates">
+                <td class="FName">
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td class="LName">
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td class="description">
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td class="latitude">
+                    @Html.DisplayFor(modelItem => item.Latitude)
+                </td>
+                <td class="longitude">
+                    @Html.DisplayFor(modelItem => item.Longitude)
+                </td>
+                <td>
+                    @Html.ActionLink("Add/View Feedback", "ShowFeedback", new { vetsid = item.Id })
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id });
+                        <p></p>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id });
+                        <p></p>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id });
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    }
+                </td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>*@
+            </tr>
+        }
+
+    </table>
+
+    @section Scripts {
+
+        <script src="~/Scripts/vets.js"></script>
+        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js'></script>
+        @*<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>*@
+        @*<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css' type='text/css'>
+
+            <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+            <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">*@
+
+
+    }
 
 
